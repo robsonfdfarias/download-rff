@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Slide image RFF
+Plugin Name: Download Rff
 Plugin URI: http://exemplo.com
 Description: Cria um sistema de administração de downloads.
 Version: 1.0
@@ -26,3 +26,36 @@ License: GPL2
 //Constantes com os nomes das tabelas
 define('DOWNLOAD_RFF_TABLE_CATEG', 'down_rff_categ');
 define('DOWNLOAD_RFF_TABLE_ITEMS', 'down_rff_items');
+
+/**
+ * Inserir arquivos do backend
+ */
+function down_rff_add_scripts(){
+    if(!did_action('wp_enqueue_media')){
+        wp_enqueue_media();
+    }
+    if(file_exists(DOWNLOAD_RFF_URL_CSS.'download-rff-admin.css')){
+        wp_enqueue_style('download-rff-admin', DOWNLOAD_RFF_URL_CSS.'download-rff-admin.css', null, time(), 'all');
+    }
+    if(file_exists(DOWNLOAD_RFF_URL_JS.'download-rff-admin.js')){
+        wp_enqueue_script('download-rff-js-admin', DOWNLOAD_RFF_URL_JS.'download-rff-admin.js', null, time(), 'all');
+    }
+}
+
+add_action('admin_enqueue_scripts', 'down_rff_add_scripts');
+
+
+/**
+ * Includes
+ */
+if(file_exists(plugin_dir_path(__FILE__).'download-rff-core.php')){
+    require_once(plugin_dir_path(__FILE__).'download-rff-core.php');
+}
+
+if(file_exists(DOWNLOAD_RFF_DIR_INC.'download-rff-hooks.php')){
+    require_once(DOWNLOAD_RFF_DIR_INC.'download-rff-hooks.php');
+    register_activation_hook(__FILE__, 'download_rff_install');
+    register_deactivation_hook(__FILE__, 'download_rff_uninstall');
+}
+
+// if(file_exists())
