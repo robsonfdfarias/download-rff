@@ -38,14 +38,10 @@ function download_rff_add_admin_menu(){
    );
 }
 
-function load_dashicons() {
-   wp_enqueue_style('dashicons');
-}
-add_action('wp_enqueue_scripts', 'load_dashicons');
-
 function dowload_rff_admin_page(){
    global $conn_download_rff;
    global $upload_download_rff;
+   $style_select = "padding: 5px 15px; font-weight: bold; text-transform: uppercase; margin-top:-5px";
     // Passar a URL do plugin para o script JavaScript
     echo '<script>localStorage.setItem("pluginPath", '.plugins_url('', __FILE__).'); </script>';
     ?>
@@ -77,8 +73,59 @@ function dowload_rff_admin_page(){
       $conn_download_rff->down_rff_categ_edit($tituloCateg, $categStatus);
     }
     if(isset($_POST['cadastrar_item'])){
-      if(isset($_POST['urlFile'])){
+      if(!empty($_FILES['urlFile']['name'])){
          $itemTitle = sanitize_text_field($_POST['itemTitle']);
+         $itemContent = '';
+         $itemUrlPage = sanitize_text_field($_POST['itemUrlPage']);
+         $itemStartDate = sanitize_text_field($_POST['itemStartDate']);
+         $itemEndDate = sanitize_text_field($_POST['itemEndDate']);
+         $itemCategory = sanitize_text_field($_POST['itemCategory']);
+         $itemTags = sanitize_text_field($_POST['itemTags']);
+         $itemStatusItem = sanitize_text_field($_POST['itemStatusItem']);
+         $itemOrderItems = sanitize_text_field($_POST['itemOrderItems']);
+         $conn_download_rff->down_rff_item_insert(
+                                                   $itemTitle, 
+                                                   $itemContent, 
+                                                   $itemUrlPage, 
+                                                   $itemStartDate, 
+                                                   $itemEndDate, 
+                                                   $itemCategory, 
+                                                   $itemStatusItem, 
+                                                   $itemTags, 
+                                                   $_FILES['urlFile'], 
+                                                   $itemOrderItems
+                                                );
+      }else{
+         echo '<div class="notice notice-failure is-dismissible"><p>Nenhum arquivo selecionado! Selecione um arquivo para efetuar o cadastro</p></div>';
       }
     }
+    ?>
+    <div class="wrap">
+    <h2>Conteúdo dos slides </h2>
+        <form method="post" action="" enctype="multipart/form-data" id="down_rff_form">
+            <input type="text" name="itemTitle" placeholder="Digite o título" value="" style="width: 100%;" required>
+            <input type="text" name="itemTags" placeholder="Insira as tags separadas por virgula(,). Ex: lista de candidatos,PHP,relatorio" value="" style="width: 100%;" required>
+            <input type="text" name="itemUrlPage" placeholder="Digite a URL da página com as informações para esse item" value="" required>
+            <input type="file" name="urlFile" required>
+            <input type="date" name="itemStartDate" title="Data que estará disponível o arquivo" value="" required>
+            <input type="date" name="itemEndDate" title="Data que não estará mais disponível o arquivo" value="" required>
+            <input type="text" name="itemOrderItems" title="Ordem que deve aparecer o arquivo" placeholder="Ordem que deve aparecer o arquivo" value="" required>
+            <select className="down-rff-status" name="itemStatusItem" style="<?php echo $style_select; ?>">
+               <option value="Ativo">Ativo</option>
+               <option value="Inativo">Inativo</option>
+            </select>
+            <select className="down-rff-status" name="itemCategory" style="<?php echo $style_select; ?>">
+               <?php
+                  $categorias = $conn_download_rff->down_rff_categ_get_all();
+                  if($categorias){
+                        foreach($categorias as $categoria){
+                           echo '<option value="'.esc_html($categoria->id).'">'.esc_html($categoria->title).'</option>';
+                        }
+                  }
+               ?>
+            </select>
+            <input type="submit" class="down-rff-bt-submit" id="cadastrar_item" name="cadastrar_item" value="Cadastrar">
+        </form>
+    </div>
+    <?php
 }

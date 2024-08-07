@@ -14,7 +14,7 @@
     //upload do arquivo
     function upload_file_download_rff($file){
         $upload_dir = str_replace('inc/', 'downloads/', plugin_dir_path(__FILE__));
-        $urlBase = str_replace('inc/', '', plugin_url('downloads/', __FILE__));
+        $urlBase = str_replace('inc/', '', plugins_url('downloads/', __FILE__));
         //Verifica se o diretório exoiste, caso contrário, tenta criar
         if(!file_exists($upload_dir)){
             wp_mkdir_p($upload_dir);
@@ -33,6 +33,7 @@
             $partes = explode('.', $arqName);
             $newName = $partes[0].'_'.time().'.'.$partes[1];
             $new_file_path = $upload_dir.$newName;
+            echo 'Endereço novo do arquivo: '.$new_file_path;
             if(rename($movefile['file'], $new_file_path)){
                 return $urlBase.basename($new_file_path);
             }else{

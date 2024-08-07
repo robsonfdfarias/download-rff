@@ -13,7 +13,7 @@
  $uploadFile = null;
  if(file_exists(DOWNLOAD_RFF_DIR_INC.'download-rff-upload-class.php')){
     require_once(DOWNLOAD_RFF_DIR_INC.'download-rff-upload-class.php');
-    $uploadFile = new DownloadRffUpload();
+    $uploadFile = new DownRffUpload();
  }
 
 /**
@@ -99,6 +99,7 @@
      */
     //Inserir item 
     function down_rff_item_insert($title, $content, $urlPage, $dateStart, $dateEnd, $category, $statusItem, $tags, $file, $orderItems){
+        global $uploadFile;
         $urlDoc='';
         if($uploadFile!=null){
             $urlDoc = $uploadFile->upload_file_download_rff($file);
@@ -120,13 +121,13 @@
                 'content'=>$content,
                 'urlPage'=>$urlPage,
                 'urlDoc'=>$urlDoc,
-                'dateStart'=>$dateStart,
-                'dateEnd'=>$dateEnd,
+                'startDate'=>$dateStart,
+                'endDate'=>$dateEnd,
                 'category'=>$category,
                 'statusItem'=>$statusItem,
                 'tags'=>$tags,
                 'dateUp'=>$dateUp,
-                'click'=>$click,
+                'clicks'=>$click,
                 'orderItems'=>$orderItems,
             )
         );
@@ -148,13 +149,13 @@
                 'content'=>$content,
                 'urlPage'=>$urlPage,
                 'urlDoc'=>$urlDoc,
-                'dateStart'=>$dateStart,
-                'dateEnd'=>$dateEnd,
+                'startDate'=>$dateStart,
+                'endDate'=>$dateEnd,
                 'category'=>$category,
                 'statusItem'=>$statusItem,
                 'tags'=>$tags,
                 'dateUp'=>$dateUp,
-                'click'=>$click,
+                'clicks'=>$click,
                 'orderItems'=>$orderItems,
             ),
             array('id'=>$id),
