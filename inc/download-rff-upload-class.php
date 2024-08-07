@@ -10,7 +10,7 @@
  }
 
 
- class DownloadRffUpload {
+ class DownRffUpload {
     //upload do arquivo
     function upload_file_download_rff($file){
         $upload_dir = str_replace('inc/', 'downloads/', plugin_dir_path(__FILE__));

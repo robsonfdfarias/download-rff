@@ -36,6 +36,7 @@
         tags TEXT NOT NULL,
         statusItem varchar(20),
         dateUp varchar(20),
+        orderItems mediumint(9),
         PRIMARY KEY (id)
     ) $charset_collate;";
     dbDelta($sqlItem);

@@ -19,7 +19,7 @@
 /**
  * Classe que controla o CRUD das tabelas
  */
- class DonwRffConn{
+ class DownRffConn{
     /**
      * Funções da tabela de categoria
      */
@@ -95,14 +95,19 @@
     }
 
     /**
-     * Funções da tabela Items
+     * Funções da tabela Items ----------------------------------------------------------
      */
     //Inserir item 
-    function down_rff_item_insert($title, $content, $urlPage, $urlDoc, $dateStart, $dateEnd, $category, $statusItem, $tags, $file){
+    function down_rff_item_insert($title, $content, $urlPage, $dateStart, $dateEnd, $category, $statusItem, $tags, $file, $orderItems){
+        $urlDoc='';
         if($uploadFile!=null){
-            $uploadFile->upload_file_download_rff($file);
+            $urlDoc = $uploadFile->upload_file_download_rff($file);
         }else{
             echo '<div class="notice notice-failure is-dismissible"><p>Classe de controle de upload não encontrada!</p></div>';
+        }
+        if($urlDoc=='' || $urlDoc==false){
+            echo '<div class="notice notice-failure is-dismissible"><p>Problema no upload!</p></div>';
+            die();
         }
         $dateUp = date('Y-m-d');
         $click = 0;
@@ -122,6 +127,7 @@
                 'tags'=>$tags,
                 'dateUp'=>$dateUp,
                 'click'=>$click,
+                'orderItems'=>$orderItems,
             )
         );
         if($result<=0 || $result==false){
@@ -132,7 +138,7 @@
     }
 
     //Editar item
-    function down_rff_item_edit($id, $title, $content, $urlPage, $urlDoc, $dateStart, $dateEnd, $category, $statusItem, $tags){
+    function down_rff_item_edit($id, $title, $content, $urlPage, $urlDoc, $dateStart, $dateEnd, $category, $statusItem, $tags, $orderItems){
         global $wpdb;
         $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
         $result = $wpdb->update(
@@ -149,6 +155,7 @@
                 'tags'=>$tags,
                 'dateUp'=>$dateUp,
                 'click'=>$click,
+                'orderItems'=>$orderItems,
             ),
             array('id'=>$id),
             array('%s'),
