@@ -9,6 +9,13 @@
     die();
  }
 
+ //importa e instância a classe de upload
+ $uploadFile = null;
+ if(file_exists(DOWNLOAD_RFF_DIR_INC.'download-rff-upload-class.php')){
+    require_once(DOWNLOAD_RFF_DIR_INC.'download-rff-upload-class.php');
+    $uploadFile = new DownloadRffUpload();
+ }
+
 /**
  * Classe que controla o CRUD das tabelas
  */
@@ -91,7 +98,12 @@
      * Funções da tabela Items
      */
     //Inserir item 
-    function down_rff_item_insert($title, $content, $urlPage, $urlDoc, $dateStart, $dateEnd, $category, $statusItem, $tags){
+    function down_rff_item_insert($title, $content, $urlPage, $urlDoc, $dateStart, $dateEnd, $category, $statusItem, $tags, $file){
+        if($uploadFile!=null){
+            $uploadFile->upload_file_download_rff($file);
+        }else{
+            echo '<div class="notice notice-failure is-dismissible"><p>Classe de controle de upload não encontrada!</p></div>';
+        }
         $dateUp = date('Y-m-d');
         $click = 0;
         global $wpdb;
@@ -150,7 +162,12 @@
     }
 
     //Excluir item
-    function down_rff_item_delete($id){
+    function down_rff_item_delete($id, $file){
+        if($uploadFile!=null){
+            $uploadFile->remove_file_download_rff($file);
+        }else{
+            echo '<div class="notice notice-failure is-dismissible"><p>Classe de controle de upload não encontrada!</p></div>';
+        }
         global $wpdb;
         $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
         $result = $wpdb->delete(
