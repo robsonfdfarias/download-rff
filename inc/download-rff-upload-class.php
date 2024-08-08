@@ -15,6 +15,8 @@
     function upload_file_download_rff($file){
         $upload_dir = str_replace('inc/', 'downloads/', plugin_dir_path(__FILE__));
         $urlBase = str_replace('inc/', '', plugins_url('downloads/', __FILE__));
+        $upload_dir.=date('Y-m-d').'/';
+        $urlBase.=date('Y-m-d').'/';
         //Verifica se o diretório exoiste, caso contrário, tenta criar
         if(!file_exists($upload_dir)){
             wp_mkdir_p($upload_dir);

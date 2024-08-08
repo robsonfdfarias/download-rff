@@ -85,51 +85,49 @@ function dowload_rff_admin_page(){
 
 
     $categoryData = $conn_download_rff->down_rff_categ_get_all();
-    if($categoryData){
-        echo '<br><strong>Dados Gravados</strong>';
-        echo '<div id="downRffDivCateg">';
-      //   echo '<table class="wp-list-table widefat fixed striped" style="table-layout: auto !important;">';
-        echo '<table class="wp-list-table widefat">';
-        echo '<thead><tr><th>ID</th><th>Título</th><th>Status</th><th>Ações</th></tr></thead>';
-        echo '<tbody>';
-        foreach($categoryData as $categData){
-            echo '<tr>';
-            echo '<form method="post" action="" enctype="multipart/form-data">';
-            echo '<td width="3%"><input type="hidden" value="'.esc_html($categData->id).'" name="idSlide" id="idSlide" />' . esc_html($categData->id) . '</td>';
-            echo '<td><input type="text" style="width: 100%; min-width: 30px;" value="' . esc_html($categData->title) . '" name="titleCateg" id="titleCateg" placeholder="Digite o título" /></td>';
-            echo '<td width="10%"><select className="down-rff-status" name="categStatus" style="'.$style_select.'; margin:0px;">
-                    <option value="'.esc_html($categData->statusItem).'">-> '.$categData->statusItem.' <-</option>
-                    <option value="ativo">Ativo</option>
-                    <option value="inativo">Inativo</option>
-                  </select></td>';
-            // echo '<td><input type="text" value="' . esc_html($categData->slideStatus) . '" name="slideStatus" id="slideStatus" /></td>';
-            echo '<td width="18%"><input type="submit" id="editar_categoria" name="editar_categoria" value="Editar" /><input type="submit" id="excluir_categoria" name="excluir_categoria" value="Excluir" /></td>';
-            echo '</form>';
-            echo '</tr>';
-        }
-        echo '</tbody>';
-        echo '</table></div>';
-    }
-   // if($categoryData){
-   //    echo '<br><strong>Dados Gravados</strong>';
-   //    echo '<div class="geralCategItem">';
-   //    foreach($categoryData as $categData){
-   //       echo '<div class="categItem">';
-   //        echo '<form method="post" action="" enctype="multipart/form-data">';
-   //        echo '<input type="hidden" value="'.esc_html($categData->id).'" name="idSlide" id="idSlide" />' . esc_html($categData->id);
-   //        echo '<br><input type="text" value="' . esc_html($categData->title) . '" name="titleSlide" id="titleSlide" placeholder="Digite o título" />';
-   //        echo '<br><select className="si-rff-status" name="slideStatus" style="'.$style_select.'; margin:0px;">
-   //                <option value="'.esc_html($categData->statusItem).'">-> '.$categData->statusItem.' <-</option>
-   //                <option value="ativo">Ativo</option>
-   //                <option value="inativo">Inativo</option>
-   //              </select>';
-   //        // echo '<td><input type="text" value="' . esc_html($categData->slideStatus) . '" name="slideStatus" id="slideStatus" /></td>';
-   //        echo '<br><input type="submit" id="editar_categoria" name="editar_categoria" value="Editar" /><input type="submit" id="excluir_categoria" name="excluir_categoria" value="Excluir" />';
-   //        echo '</form>';
-   //       echo '</div>';
-   //    }
-   //    echo '</div>';
-   // }
+   //  if($categoryData){
+   //      echo '<br><strong>Dados Gravados</strong>';
+   //      echo '<table class="wp-list-table widefat fixed striped" style="table-layout: auto !important;">';
+   //      echo '<thead><tr><th>ID</th><th>Título</th><th>Status</th><th>Ações</th></tr></thead>';
+   //      echo '<tbody>';
+   //      foreach($categoryData as $categData){
+   //          echo '<tr>';
+   //          echo '<form method="post" action="" enctype="multipart/form-data">';
+   //          echo '<td><input type="hidden" value="'.esc_html($categData->id).'" name="idSlide" id="idSlide" />' . esc_html($categData->id) . '</td>';
+   //          echo '<td><input type="text" value="' . esc_html($categData->title) . '" name="titleSlide" id="titleSlide" placeholder="Digite o título" /></td>';
+   //          echo '<td><select className="si-rff-status" name="slideStatus" style="'.$style_select.'; margin:0px;">
+   //                  <option value="'.esc_html($categData->statusItem).'">-> '.$categData->statusItem.' <-</option>
+   //                  <option value="ativo">Ativo</option>
+   //                  <option value="inativo">Inativo</option>
+   //                </select></td>';
+   //          // echo '<td><input type="text" value="' . esc_html($categData->slideStatus) . '" name="slideStatus" id="slideStatus" /></td>';
+   //          echo '<td><input type="submit" class="si-rff-bt-submit" id="EditarSlide" name="EditarSlide" value="Editar" /><input type="submit" class="si-rff-bt-submit" id="ExcluirSlide" name="ExcluirSlide" value="Excluir" /></td>';
+   //          echo '</form>';
+   //          echo '</tr>';
+   //      }
+   //      echo '</tbody>';
+   //      echo '</table>';
+   //  }
+   if($categoryData){
+      echo '<br><strong>Dados Gravados</strong>';
+      echo '<div class="geralCategItem">';
+      foreach($categoryData as $categData){
+         echo '<div class="categItem">';
+          echo '<form method="post" action="" enctype="multipart/form-data">';
+          echo '<input type="hidden" value="'.esc_html($categData->id).'" name="idSlide" id="idSlide" />' . esc_html($categData->id);
+          echo '<br><input type="text" value="' . esc_html($categData->title) . '" name="titleSlide" id="titleSlide" placeholder="Digite o título" />';
+          echo '<br><select className="si-rff-status" name="slideStatus" style="'.$style_select.'; margin:0px;">
+                  <option value="'.esc_html($categData->statusItem).'">-> '.$categData->statusItem.' <-</option>
+                  <option value="ativo">Ativo</option>
+                  <option value="inativo">Inativo</option>
+                </select>';
+          // echo '<td><input type="text" value="' . esc_html($categData->slideStatus) . '" name="slideStatus" id="slideStatus" /></td>';
+          echo '<br><input type="submit" id="editar_categoria" name="editar_categoria" value="Editar" /><input type="submit" id="excluir_categoria" name="excluir_categoria" value="Excluir" />';
+          echo '</form>';
+         echo '</div>';
+      }
+      echo '</div>';
+  }
 
 
 
@@ -162,6 +160,34 @@ function dowload_rff_admin_page(){
       }
     }
     ?>
+    <!-- <div class="wrap">
+    <h2>Conteúdo dos slides </h2>
+        <form method="post" action="" enctype="multipart/form-data" id="down_rff_form">
+            <input type="text" name="itemTitle" placeholder="Digite o título" value="" style="width: 100%;" required>
+            <input type="text" name="itemTags" placeholder="Insira as tags separadas por virgula(,). Ex: lista de candidatos,PHP,relatorio" value="" style="width: 100%;" required>
+            <input type="text" name="itemUrlPage" placeholder="Digite a URL da página com as informações para esse item" value="" required>
+            <input type="file" name="urlFile" required>
+            <input type="date" name="itemStartDate" title="Data que estará disponível o arquivo" value="" required>
+            <input type="date" name="itemEndDate" title="Data que não estará mais disponível o arquivo" value="" required>
+            <input type="text" name="itemOrderItems" title="Ordem que deve aparecer o arquivo" placeholder="Ordem que deve aparecer o arquivo" value="" required>
+            <select className="down-rff-status" name="itemStatusItem" style="<?php //echo $style_select; ?>">
+               <option value="Ativo">Ativo</option>
+               <option value="Inativo">Inativo</option>
+            </select>
+            <select className="down-rff-status" name="itemCategory" style="<?php //echo $style_select; ?>">
+               <?php
+                  // $categorias = $conn_download_rff->down_rff_categ_get_all();
+                  // if($categorias){
+                  //       foreach($categorias as $categoria){
+                  //          echo '<option value="'.esc_html($categoria->id).'">'.esc_html($categoria->title).'</option>';
+                  //       }
+                  // }
+               ?>
+            </select>
+            <input type="submit" class="down-rff-bt-submit" id="cadastrar_item" name="cadastrar_item" value="Cadastrar">
+        </form>
+    </div> -->
+
     <div class="wrap">
       
       <div id="centroDownRff">
@@ -239,45 +265,7 @@ function dowload_rff_admin_page(){
     <?php
 
     $itemDados = $conn_download_rff->down_rff_item_get_all();
-   //  if($itemDados){
-   //    echo '<h2>Itens cadastrados</h2>';
-   //    echo '<button id="cadItemDownRff">Cadastrar Item</button><br>';
-   //    echo '<strong>Dados Gravados</strong>';
-   //    echo '<div id="geralItemItem">';
-   //    echo '';
-   //    foreach($itemDados as $itemdado){
-   //       $partesDocsPath = explode('/', $itemdado->urlDoc);
-   //       $name = $partesDocsPath[(sizeof($partesDocsPath)-1)];
-   //       echo '<div class="itemItem">';
-   //       echo '<form method="post" action="" enctype="multipart/form-data">';
-   //       echo ''.$itemdado->id.'<br>';
-   //       echo 'Titulo: <input type="text" name="itemTitle" value="'.$itemdado->title.'"><br>';
-   //       echo 'Arquivo: <a href="'.$itemdado->urlDoc.'" title="'.$name.'" target="_blank">'.substr($name, 0, 25).'...</a><br>';
-   //       echo '<input type="date" name="itemStartDate" title="Insira a data que ficará disponível esse arquivo" value="'.$itemdado->startDate.'">';
-   //       echo '<input type="date" name="itemEndDate" title="Insira a data limite para estar disponível esse arquivo" value="'.$itemdado->endDate.'">';
-   //       echo '';
-   //       echo '<select name="itemStatusItem" style="width:112px; margin-top: -5px;" required>';
-   //       echo '<option value="Ativo">Ativo</option>';
-   //       echo '<option value="Inativo">Inativo</option>';
-   //       echo '</select><br>';
-   //       echo 'Categoria: <select style="width:100%;" name="itemCategory" required>';
-   //       if($categoryData){
-   //          foreach($categoryData as $categData){
-   //             echo '<option value="'.$categData->id.'">'.$categData->title.'</option>';
-   //          }
-   //       }
-   //       echo '</select>';
-   //       echo 'Tags: <input type="text" name="itemTags" value="'.$itemdado->tags.'"><br>';
-   //       echo 'Ordem: <input type="text" name="itemOrderItems" value="'.$itemdado->orderItems.'">';
-   //       echo '<br><input type="submit" id="editar_item" name="editar_item" value="Editar" /><input type="submit" id="excluir_item" name="excluir_item" value="Excluir" />';
-   //       echo '</form>';
-   //       echo '</div>';
-   //    }
-   //    echo '</div>';
-   //  }
-
-
-   if($itemDados){
+    if($itemDados){
       echo '<h2>Itens cadastrados</h2>';
       echo '<button id="cadItemDownRff">Cadastrar Item</button><br>';
       echo '<strong>Dados Gravados</strong>';
@@ -289,9 +277,8 @@ function dowload_rff_admin_page(){
          echo '<div class="itemItem">';
          echo '<form method="post" action="" enctype="multipart/form-data">';
          echo ''.$itemdado->id.'<br>';
-         echo 'Titulo: <input type="text" id="itemTitle" name="itemTitle" value="'.$itemdado->title.'"><br>';
-         echo 'Url page: <input type="text" id="itemUrlPage" name="itemUrlPage" value="'.$itemdado->urlPage.'"><br>';
-         echo 'Arquivo:<input type="hidden" id="itemUrlDoc" value="'.$itemdado->urlDoc.'"> <a href="'.$itemdado->urlDoc.'" title="'.$name.'" target="_blank">'.substr($name, 0, 25).'...</a><br>';
+         echo 'Titulo: <input type="text" name="itemTitle" value="'.$itemdado->title.'"><br>';
+         echo 'Arquivo: <a href="'.$itemdado->urlDoc.'" title="'.$name.'" target="_blank">'.substr($name, 0, 25).'...</a><br>';
          echo '<input type="date" name="itemStartDate" title="Insira a data que ficará disponível esse arquivo" value="'.$itemdado->startDate.'">';
          echo '<input type="date" name="itemEndDate" title="Insira a data limite para estar disponível esse arquivo" value="'.$itemdado->endDate.'">';
          echo '';
@@ -300,97 +287,15 @@ function dowload_rff_admin_page(){
          echo '<option value="Inativo">Inativo</option>';
          echo '</select><br>';
          echo 'Categoria: <select style="width:100%;" name="itemCategory" required>';
-         if($categoryData){
-            foreach($categoryData as $categData){
-               echo '<option value="'.$categData->id.'">'.$categData->title.'</option>';
-            }
-         }
+         echo '<option value="Ativo">Categoria 1</option>';
+         echo '<option value="Ativo">Categoria 2</option>';
          echo '</select>';
          echo 'Tags: <input type="text" name="itemTags" value="'.$itemdado->tags.'"><br>';
          echo 'Ordem: <input type="text" name="itemOrderItems" value="'.$itemdado->orderItems.'">';
-         // echo '<br><input type="submit" id="editar_item" name="editar_item" value="Editar" /><input type="submit" id="excluir_item" name="excluir_item" value="Excluir" />';
-         echo '<br><input type="submit" class="edit" id="edit" name="edit" value="Editar" /><input type="submit" id="excluir_item" name="excluir_item" value="Excluir" />';
+         echo '<br><input type="submit" id="editar_item" name="editar_item" value="Editar" /><input type="submit" id="excluir_item" name="excluir_item" value="Excluir" />';
          echo '</form>';
          echo '</div>';
       }
       echo '</div>';
     }
-
-
-    ?>
-    <div class="wrap">
-      
-      <div id="centroDownRffEdit">
-         <div class="form-container">
-            <h1>Formulário de Edição</h1>
-            <div id="downRffCloseEdit">X</div>
-            <form method="post" action="" enctype="multipart/form-data" id="down_rff_form">
-                  <div class="form-group horizontal">
-                     <div class="form-group">
-                        <label for="itemTitle">Título</label>
-                        <input type="text" id="itemTitleEdit" name="itemTitle" placeholder="Digite o título" required>
-                     </div>
-
-                     <div class="form-group">
-                        <label for="itemUrlPage">URL da Página</label>
-                        <input type="url" id="itemUrlPageEdit" name="itemUrlPage" placeholder="Digite a URL" required>
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="urlFile">Arquivo</label>
-                     <input type="hidden" id="urlFileEdit" name="urlFile" required>
-                  </div>
-
-                  <div class="form-group date-group">
-                     <div class="date-item">
-                        <label for="itemStartDate">Data de Início</label>
-                        <input type="date" id="itemStartDateEdit" name="itemStartDate" required>
-                     </div>
-                     <div class="date-item">
-                        <label for="itemEndDate">Data de Término</label>
-                        <input type="date" id="itemEndDateEdit" name="itemEndDate" required>
-                     </div>
-                  </div>
-
-                  <div class="form-group horizontal">
-                     <div class="form-group">
-                        <label for="itemCategory">Categoria</label>
-                        <select id="itemCategoryEdit" name="itemCategory" required>
-                           <?php
-                              $categorias = $conn_download_rff->down_rff_categ_get_all();
-                              if($categorias){
-                                    foreach($categorias as $categoria){
-                                       echo '<option value="'.esc_html($categoria->id).'">'.esc_html($categoria->title).'</option>';
-                                    }
-                              }
-                           ?>
-                        </select>
-                     </div>
-
-                     <div class="form-group">
-                        <label for="itemStatusItem">Status do Item</label>
-                        <select id="itemStatusItemEdit" name="itemStatusItem" required>
-                              <option value="Ativo">Ativo</option>
-                              <option value="Inativo">Inativo</option>
-                        </select>
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="itemTags">Tags</label>
-                     <input type="text" id="itemTagsEdit" name="itemTags" placeholder="Digite as tags, separadas por vírgula" required>
-                  </div>
-
-                  <div class="form-group">
-                     <label for="itemOrderItems">Ordem do Item</label>
-                     <input type="number" id="itemOrderItemsEdit" name="itemOrderItems" placeholder="Digite a ordem" required>
-                  </div>
-
-                  <button type="submit" id="editar_item" name="editar_item">Editar</button>
-            </form>
-         </div>
-      </div>
-    </div>
-    <?php
 }

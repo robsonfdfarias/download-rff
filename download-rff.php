@@ -27,23 +27,26 @@ License: GPL2
 define('DOWNLOAD_RFF_TABLE_CATEG', 'down_rff_categ');
 define('DOWNLOAD_RFF_TABLE_ITEMS', 'down_rff_items');
 
-/**
- * Inserir arquivos do backend
- */
-function down_rff_add_scripts(){
+
+ /**
+  * Registrando o css (backend)
+  */
+  function down_rff_registre_css_admin(){
+    wp_enqueue_style('download-rff-admin', DOWNLOAD_RFF_URL_CSS.'download-rff-admin.css', null, time(), 'all');
+  }
+  add_action('admin_enqueue_scripts', 'down_rff_registre_css_admin');
+  
+ /**
+  * Registrando o js (backend)
+  */
+  function down_rff_registre_js_admin(){
     if(!did_action('wp_enqueue_media')){
         wp_enqueue_media();
     }
-    if(file_exists(DOWNLOAD_RFF_URL_CSS.'download-rff-admin.css')){
-        wp_enqueue_style('download-rff-admin', DOWNLOAD_RFF_URL_CSS.'download-rff-admin.css', null, time(), 'all');
-    }
-    if(file_exists(DOWNLOAD_RFF_URL_JS.'download-rff-admin.js')){
-        wp_enqueue_script('download-rff-js-admin', DOWNLOAD_RFF_URL_JS.'download-rff-admin.js', null, time(), 'all');
-    }
-}
-
-add_action('admin_enqueue_scripts', 'down_rff_add_scripts');
-
+    wp_enqueue_script('download-rff-js-admin', DOWNLOAD_RFF_URL_JS.'download-rff-admin.js', null, time(), 'all');
+  }
+  add_action('admin_enqueue_scripts', 'down_rff_registre_js_admin');
+  
 
 /**
  * Includes
