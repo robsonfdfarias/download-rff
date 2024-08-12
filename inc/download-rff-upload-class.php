@@ -33,9 +33,9 @@
         if($movefile && !isset($movefile['error'])){
             $arqName = basename($movefile['file']);
             $partes = explode('.', $arqName);
-            $newName = $partes[0].'_'.time().'.'.$partes[1];
+            $newName = $partes[0].'_'.time().'.'.$partes[(sizeof($partes)-1)];
             $new_file_path = $upload_dir.$newName;
-            echo 'Endereço novo do arquivo: '.$new_file_path;
+            // echo 'Endereço novo do arquivo: '.$new_file_path;
             if(rename($movefile['file'], $new_file_path)){
                 return $urlBase.basename($new_file_path);
             }else{
@@ -50,7 +50,7 @@
 
     function remove_file_download_rff($file){
         $partes = explode('/', $file);
-        $path = DOWNLOAD_RFF_DIR_FILE.$partes[(sizeof($partes)-1)];
+        $path = DOWNLOAD_RFF_DIR_FILE.$partes[(sizeof($partes)-2)].'/'.$partes[(sizeof($partes)-1)];
         if(file_exists($path)){
             if(unlink($path)){
                 echo '<div class="notice notice-success is-dismissible"><p>Arquivo excluída com sucesso!</p></div>';
@@ -59,7 +59,7 @@
                 die();
             }
         }else{
-            echo '<div class="notice notice-failure is-dismissible"><p>arquivo não encontrada!</p></div>';
+            echo '<div class="notice notice-failure is-dismissible"><p>arquivo não encontrado!</p></div>';
             die();
         }
     }

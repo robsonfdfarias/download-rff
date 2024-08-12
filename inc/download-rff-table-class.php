@@ -69,7 +69,7 @@
         $result = $wpdb->delete(
             $table_name,
             array('id'=>$id),
-            array('$d')
+            array('%d')
         );
         if($result<=0 || $result==false){
             echo '<div class="notice notice-failure is-dismissible"><p>Não foi possível excluir a categoria. Erro: '.$wpdb->last_error.'</p></div>';
@@ -91,7 +91,7 @@
         global $wpdb;
         $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_CATEG;
         $result = $wpdb->get_results("SELECT * FROM $table_name WHERE id=$id");
-        return $result;
+        return $result[0];
     }
 
     /**
@@ -142,6 +142,7 @@
     function down_rff_item_edit($id, $title, $content, $urlPage, $urlDoc, $dateStart, $dateEnd, $category, $statusItem, $tags, $orderItems){
         global $wpdb;
         $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
+        $dateUp = date('Y-m-d');
         $result = $wpdb->update(
             $table_name,
             array(
@@ -152,16 +153,30 @@
                 'startDate'=>$dateStart,
                 'endDate'=>$dateEnd,
                 'category'=>$category,
-                'statusItem'=>$statusItem,
+                'clicks'=>0,
                 'tags'=>$tags,
+                'statusItem'=>$statusItem,
                 'dateUp'=>$dateUp,
-                'clicks'=>$click,
                 'orderItems'=>$orderItems,
             ),
             array('id'=>$id),
             array('%s'),
             array('%d'),
         );
+        // echo '<h1>ID: '.$id.'</h1>';
+        // echo '<h1>Title: '.$title.'</h1>';
+        // echo '<h1>Content: '.$content.'</h1>';
+        // echo '<h1>UrlPage: '.$urlPage.'</h1>';
+        // echo '<h1>UrlDoc: '.$urlDoc.'</h1>';
+        // echo '<h1>StartDate: '.$dateStart.'</h1>';
+        // echo '<h1>EndDate: '.$dateEnd.'</h1>';
+        // echo '<h1>Category: '.$category.'</h1>';
+        // echo '<h1>StatusItem: '.$statusItem.'</h1>';
+        // echo '<h1>Tags: '.$tags.'</h1>';
+        // echo '<h1>OrderItems: '.$orderItems.'</h1>';
+        // echo '<h1>Nome da tabela: '.$table_name.'</h1>';
+        // echo '<h1>Data pub: '.$dateUp.'</h1>';
+        // echo '<h1>Retorno: '.$result.'</h1>';
         if($result<=0 || $result==false){
             echo '<div class="notice notice-failure is-dismissible"><p>Não foi possível <strong>atualizar</strong> o item. Erro: '.$wpdb->last_error.'</p></div>';
         }else{
@@ -171,10 +186,12 @@
 
     //Excluir item
     function down_rff_item_delete($id, $file){
+        global $uploadFile;
         if($uploadFile!=null){
             $uploadFile->remove_file_download_rff($file);
         }else{
             echo '<div class="notice notice-failure is-dismissible"><p>Classe de controle de upload não encontrada!</p></div>';
+            die();
         }
         global $wpdb;
         $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;

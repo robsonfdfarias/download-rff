@@ -62,3 +62,18 @@ if(file_exists(DOWNLOAD_RFF_DIR_INC.'download-rff-hooks.php')){
 }
 
 // if(file_exists())
+
+//permitindo o upload de SVG
+// Permitir upload de arquivos SVG
+function permitir_upload_svg($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter('upload_mimes', 'permitir_upload_svg');
+
+// Adicionar suporte para visualizar SVGs na biblioteca de mídia
+function adicionar_tamanho_svg($sizes) {
+  $sizes['svg'] = 'SVG';
+  return $sizes;
+}
+add_filter('image_size_names_choose', 'adicionar_tamanho_svg');
