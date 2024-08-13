@@ -156,7 +156,7 @@
                 'clicks'=>0,
                 'tags'=>$tags,
                 'statusItem'=>$statusItem,
-                'dateUp'=>$dateUp,
+                // 'dateUp'=>$dateUp,
                 'orderItems'=>$orderItems,
             ),
             array('id'=>$id),

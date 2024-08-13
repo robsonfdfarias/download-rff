@@ -77,3 +77,12 @@ function adicionar_tamanho_svg($sizes) {
   return $sizes;
 }
 add_filter('image_size_names_choose', 'adicionar_tamanho_svg');
+
+
+if(file_exists(DOWNLOAD_RFF_DIR_INC.'download-rff-graphql.php')){
+  require_once(DOWNLOAD_RFF_DIR_INC.'download-rff-graphql.php');
+}
+//Registrar tipos e campos no GraphQl
+add_action('graphql_register_types', 'register_custom_table_download_rff_categ_in_graphql');
+//Registrar tipos e campos no GraphQl tabela name slide
+add_action('graphql_register_types', 'register_custom_table_download_rff_items_in_graphql');

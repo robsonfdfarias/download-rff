@@ -128,7 +128,7 @@
         ]
     ]);
 
-    register_graphql_field('RootQuery', DOWNLOAD_RFF_TABLE_CATEG, [
+    register_graphql_field('RootQuery', DOWNLOAD_RFF_TABLE_ITEMS, [
         'type'=>['list_of' => 'CustomTableTypesDownloadRffItems'],
         'description' => __('Query de consulta da tabela', 'your-textdomain'),
         'args' => [
@@ -175,7 +175,7 @@
         ],
         'resolve' => function($root, $args, $context, $info){
             global $wpdb;
-            $table_categ = $wpdb->prefix.DOWNLOAD_RFF_TABLE_CATEG;
+            $table_categ = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
             $where_clauses = [];
             if(!empty($args['id'])){
                 $where_clauses[] = $wpdb->prepare('id = %d', $args['id']);
