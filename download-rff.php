@@ -28,6 +28,28 @@ define('DOWNLOAD_RFF_TABLE_CATEG', 'down_rff_categ');
 define('DOWNLOAD_RFF_TABLE_ITEMS', 'down_rff_items');
 
 
+
+ /**
+  * Registrando o css (frontend)
+  */
+  function down_rff_registre_css_core(){
+    wp_enqueue_style('download-rff-core', DOWNLOAD_RFF_URL_CSS.'download-rff-core.css', null, time(), 'all');
+  }
+  add_action('wp_enqueue_scripts', 'down_rff_registre_css_core');
+  
+ /**
+  * Registrando o js (frontend)
+  */
+  function down_rff_registre_js_core(){
+    if(!did_action('wp_enqueue_media')){
+        wp_enqueue_media();
+    }
+    wp_enqueue_script('download-rff-js-core', DOWNLOAD_RFF_URL_JS.'download-rff-core.js', null, time(), 'all');
+  }
+  add_action('wp_enqueue_scripts', 'down_rff_registre_js_core');
+  
+
+
  /**
   * Registrando o css (backend)
   */
@@ -51,6 +73,9 @@ define('DOWNLOAD_RFF_TABLE_ITEMS', 'down_rff_items');
 /**
  * Includes
  */
+if(file_exists(DOWNLOAD_RFF_DIR_INC.'download-rff-shortcode.php')){
+    require_once(DOWNLOAD_RFF_DIR_INC.'download-rff-shortcode.php');
+}
 if(file_exists(plugin_dir_path(__FILE__).'download-rff-core.php')){
     require_once(plugin_dir_path(__FILE__).'download-rff-core.php');
 }

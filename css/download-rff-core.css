@@ -1,0 +1,33 @@
+.down_objs{
+    border: 1px solid #cdcdcd;
+}
+
+.down_obj{
+    /* background-color: aquamarine; */
+    /* margin-bottom: -15px; */
+}
+
+.down_categ{
+    background-color: rgb(245, 255, 216);
+    border: 1px solid #cdcdcd;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all ease-in 0.2s;
+}
+.down_categ:hover {
+    background-color: rgb(207, 247, 89);
+}
+
+.down_files{
+    /* background-color: blueviolet; */
+    /* margin-top: -18px; */
+    /* display: none; */
+    height: 0px;
+    overflow: hidden;
+    transition: all ease-in 0.3s;
+}
+
+.down_files ul{
+    margin: 5px;
+    margin-bottom: 20px;
+}

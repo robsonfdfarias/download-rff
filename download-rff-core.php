@@ -257,11 +257,72 @@ function dowload_rff_admin_page(){
     </div>
     <?php
 
-    $itemDados = $conn_download_rff->down_rff_item_get_all();
+   //  $itemDados = $conn_download_rff->down_rff_item_get_all();
 
 
+    $fileName = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
+    if(isset($_POST['down_save_filter'])){
+      $arq = fopen($fileName, 'w'); // 'a' é para abrir o arquivo em modo de acréscimo (append)
+      if ($arq) {
+         // Escreve o conteúdo no arquivo
+         // fwrite($arq, $_POST['down_rff_filtro'] . PHP_EOL); // Adiciona uma nova linha após o texto
+         fwrite($arq, $_POST['down_rff_filtro']);
+         
+         // Fecha o arquivo
+         fclose($arq);
+         
+         // Envia uma resposta ao cliente
+         // echo 'Arquivo salvo com sucesso!';
+     } else {
+         // Se não conseguiu abrir o arquivo, enviar uma resposta de erro
+         // echo 'Erro ao abrir o arquivo.';
+     }
+    }
+    // Ler o arquivo em um array
+      $linhas = file($fileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      $val = null;
+      // Verificar se a leitura foi bem-sucedida
+      if ($linhas === false) {
+         // echo 'Erro ao ler o arquivo.';
+      } else {
+         // echo '<h2>Conteúdo do Arquivo:</h2>';
+         // echo '<ul>';
+         // // Exibir cada linha
+         // foreach ($linhas as $linha) {
+         //    echo '<li>' . htmlspecialchars($linha) . '</li>';
+         // }
+         // echo '</ul>';
+         if(sizeof($linhas)>0){
+            // echo '<h1>'.$linhas[0].'</h1>';
+            if($linhas[0]!=0){
+               $val = $linhas[0];
+               $itemDados = $conn_download_rff->down_rff_item_by_id_categ($linhas[0]);
+            }else{
+               $itemDados = $conn_download_rff->down_rff_item_get_all();
+            }
+         }else{
+            echo '---------------------------';
+            $itemDados = $conn_download_rff->down_rff_item_get_all();
+         }
+      }
       echo '<div style="position:relative; margin-top: 30px;"><h2>Itens cadastrados</h2>';
       echo '<button id="cadItemDownRff">Cadastrar Item</button></div>';
+      echo '<form method="post" action="">';
+      echo '<select name="down_rff_filtro">';
+      echo '<option value="0">Todos</option>';
+      if($categorias){
+         foreach($categorias as $categoria){
+            echo '<option value="'.esc_html($categoria->id).'">'.esc_html($categoria->title).'</option>';
+         }
+      }
+      echo '</select>';
+      echo '<input type="submit" id="down_save_filter" name="down_save_filter" value="Filtrar">';
+      //Aqui imprimi se você fez algum filtro
+      if($val!=null){
+         $categ = $conn_download_rff->down_rff_categ_by_id($val);
+         echo ' Você selecionou a categoria: <strong>'.$categ->title.'</strong>';
+      }
+      echo '</form>';
    if($itemDados){
       echo '<table class="wp-list-table widefat">';
       echo '<thead><tr><th>ID</th><th>Ordem</th><th>Título</th><th>Documento</th><th>Ações</th></tr></thead>';

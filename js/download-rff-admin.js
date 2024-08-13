@@ -65,6 +65,16 @@ jQuery(document).ready(function($){
     $('#downRffCloseEdit').on('click', function(){
         $('#centroDownRffEdit').hide(400);
     })
+
+    // $('#down_save_filter').on('click', function(e){
+    //     // e.preventDefault();
+    //     console.log($('#down_rff_filtro').val())
+    //     if($('#down_rff_filtro').val()<=0){
+    //         alert('Você selecionou todos')
+    //     }else if($('#down_rff_filtro').val()==1){
+    //         alert('Você selecionou o primeiro')
+    //     }
+    // })
 });
 
 // var oo = document.getElementById('edit');

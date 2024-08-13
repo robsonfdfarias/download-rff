@@ -94,6 +94,15 @@
         return $result[0];
     }
 
+
+    //recupera dados ativos para shortcode
+    function down_rff_get_categ_active(){
+        global $wpdb;
+        $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_CATEG;
+        $results = $wpdb->get_results("SELECT * FROM $table_name WHERE statusItem = 'Ativo'");
+        return $results;
+    }
+
     /**
      * Funções da tabela Items ----------------------------------------------------------
      */
@@ -221,5 +230,21 @@
         $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
         $result = $wpdb->get_results("SELECT * FROM $table_name WHERE id = $id");
         return $result[0];
+    }
+
+    //Recupera o item por ID da categ
+    function down_rff_item_by_id_categ($idCat){
+        global $wpdb;
+        $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
+        $result = $wpdb->get_results("SELECT * FROM $table_name WHERE category = $idCat");
+        return $result;
+    }
+
+    //recupera dados ativos para shortcode
+    function down_rff_get_item_active($id){
+        global $wpdb;
+        $table_name = $wpdb->prefix.DOWNLOAD_RFF_TABLE_ITEMS;
+        $results = $wpdb->get_results("SELECT * FROM $table_name WHERE category = $id AND statusItem = 'Ativo'");
+        return $results;
     }
  }
