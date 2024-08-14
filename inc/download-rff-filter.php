@@ -8,12 +8,12 @@
     die();
  }
 
-$fileName = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
+$fileNameDown = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
  class DownRffFilter {
     function save_filter($filtro){
-        global $fileName;
+        global $fileNameDown;
         if(isset($filtro)){
-            $arq = fopen($fileName, 'w'); // 'a' é para abrir o arquivo em modo de acréscimo (append)
+            $arq = fopen($fileNameDown, 'w'); // 'a' é para abrir o arquivo em modo de acréscimo (append)
             if ($arq) {
                 // Escreve o conteúdo no arquivo
                 // fwrite($arq, $_POST['down_rff_filtro'] . PHP_EOL); // Adiciona uma nova linha após o texto
@@ -27,16 +27,17 @@ $fileName = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
                 // echo 'Erro ao abrir o arquivo.';
             }
         }
-        //
+        // 
     }
 
     function read_filter($conn_download_rff){
-        global $fileName;
-        if(!file_exists($fileName)){
+        global $fileNameDown;
+        // echo $fileNameDown;
+        if(!file_exists($fileNameDown)){
             $this->save_filter("0");
         }
         // Ler o arquivo em um array
-        $linhas = file($fileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $linhas = file($fileNameDown, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $val = null;
         // Verificar se a leitura foi bem-sucedida
         if ($linhas === false) {

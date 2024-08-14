@@ -260,7 +260,7 @@ function dowload_rff_admin_page(){
 
    $downRffFilter = new DownRffFilter();
    if(isset($_POST['down_save_filter'])){
-      $downRffFilter->save_filter($_POST['down_save_filter']);
+      $downRffFilter->save_filter($_POST['down_rff_filtro']);
    }
    $filter = $downRffFilter->read_filter($conn_download_rff);
 
