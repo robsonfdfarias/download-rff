@@ -298,7 +298,7 @@ function dowload_rff_admin_page(){
          echo '<td>'.$itemdado->orderItems.'</td>';
          echo '<td>'.$itemdado->title.'</td>';
          echo '<td><a href="'.$itemdado->urlDoc.'" title="'.$name.'" target="_blank">'.substr($name, 0, 25).'...</a></td>';
-         echo '<td id="down_rff_bts"><input type="submit" class="edit" id="edit" name="edit" value="Editar" /><input type="submit" id="excluir_item" name="excluir_item" value="Excluir" /></td>';
+         echo '<td id="down_rff_bts"><input type="submit" class="down_rff_edit" id="edit" name="edit" value="Editar" /><input type="submit" id="excluir_item" name="excluir_item" value="Excluir" /></td>';
          echo '<td style="display:none;">
                   <input type="text" id="itemUrlPage" name="itemUrlPage" value="'.$itemdado->urlPage.'">
                   <input type="date" id="itemStartDate" value="'.$itemdado->startDate.'">

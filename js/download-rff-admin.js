@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
     })
 
 
-    $('.edit').on('click', function(e){
+    $('.down_rff_edit').on('click', function(e){
         e.preventDefault();
         // alert('dfndsçjnd')
         console.log(this.parentNode)

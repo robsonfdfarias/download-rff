@@ -17,7 +17,7 @@ $fileName = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
             if ($arq) {
                 // Escreve o conteúdo no arquivo
                 // fwrite($arq, $_POST['down_rff_filtro'] . PHP_EOL); // Adiciona uma nova linha após o texto
-                fwrite($arq, $_POST['down_rff_filtro']);
+                fwrite($arq, $filtro);
                 // Fecha o arquivo
                 fclose($arq);
                 // Envia uma resposta ao cliente
@@ -32,22 +32,17 @@ $fileName = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
 
     function read_filter($conn_download_rff){
         global $fileName;
+        if(!file_exists($fileName)){
+            $this->save_filter("0");
+        }
         // Ler o arquivo em um array
         $linhas = file($fileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $val = null;
         // Verificar se a leitura foi bem-sucedida
         if ($linhas === false) {
-            // echo 'Erro ao ler o arquivo.';
+            $itemDados = $conn_download_rff->down_rff_item_get_all();
         } else {
-            // echo '<h2>Conteúdo do Arquivo:</h2>';
-            // echo '<ul>';
-            // // Exibir cada linha
-            // foreach ($linhas as $linha) {
-            //    echo '<li>' . htmlspecialchars($linha) . '</li>';
-            // }
-            // echo '</ul>';
             if(sizeof($linhas)>0){
-            // echo '<h1>'.$linhas[0].'</h1>';
                 if($linhas[0]!=0){
                     $val = $linhas[0];
                     $itemDados = $conn_download_rff->down_rff_item_by_id_categ($linhas[0]);
@@ -55,10 +50,9 @@ $fileName = DOWNLOAD_RFF_DIR_FILE.'filtro.txt';
                     $itemDados = $conn_download_rff->down_rff_item_get_all();
                 }
             }else{
-                echo '---------------------------';
                 $itemDados = $conn_download_rff->down_rff_item_get_all();
             }
-            return ['val'=>$val, 'itemDados'=>$itemDados];
         }
+        return ['val'=>$val, 'itemDados'=>$itemDados];
     }
  }
