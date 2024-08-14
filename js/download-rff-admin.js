@@ -35,17 +35,6 @@ jQuery(document).ready(function($){
         var tags = tr.children[5].children[3]; //Usar o value
         var statusItem = tr.children[5].children[4]; //Usar o value
         var itemCategory = tr.children[5].children[5]; //Usar o value
-        console.log(id.innerHTML)
-        console.log(orderItems.innerHTML)
-        console.log(titulo.innerHTML)
-        console.log(doc)
-        console.log(urlPage.value)
-        console.log(startDate.value)
-        console.log(endDate.value)
-        console.log(tags.value)
-        console.log(statusItem.value)
-        console.log(itemCategory.getAttribute('name'))
-        console.log(itemCategory.value)
 
         $('#itemId').val(id.innerHTML);
         $('#itemTitleEdit').val(titulo.innerHTML);
@@ -66,17 +55,7 @@ jQuery(document).ready(function($){
         $('#centroDownRffEdit').hide(400);
     })
 
-    // $('#down_save_filter').on('click', function(e){
-    //     // e.preventDefault();
-    //     console.log($('#down_rff_filtro').val())
-    //     if($('#down_rff_filtro').val()<=0){
-    //         alert('Você selecionou todos')
-    //     }else if($('#down_rff_filtro').val()==1){
-    //         alert('Você selecionou o primeiro')
-    //     }
-    // })
+    $('#down_rff_img_info').on('click', function(){
+        window.open('https://www.youtube.com/@RobsonFarias-os2di', '_blank');
+    });
 });
-
-// var oo = document.getElementById('edit');
-// var pp = oo.parentNode;
-// console.log(pp.child)

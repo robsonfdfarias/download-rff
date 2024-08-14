@@ -9,6 +9,7 @@
     display: none;/*block*/
     margin: 0;
     background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
 }
 .form-container {
     background: #ffffff;
@@ -198,6 +199,7 @@ button:hover {
     display: none;
     margin: 0;
     background-color: rgba(0,0,0,0.5);
+    z-index: 1001;
 }
 
 #downRffCloseEdit{
@@ -231,6 +233,7 @@ button:hover {
     display: none;
     margin: 0;
     background-color: rgba(0,0,0,0.5);
+    z-index: 1002;
 }
 
 #downRffCloseCadCateg{
